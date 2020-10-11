@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +26,10 @@ Route::get('/post/{id}', [PublicController::class, 'showSinglePost'])->name('sin
 Route::get('/contact', [PublicController::class, 'showContact'])->name('contact');
 Route::get('/contact/post', [PublicController::class, 'storeContactPost'])->name('contactPost');
 
+
+Route::prefix('admin')->group(function(){
+    Route::get('/dashboard', [AdminController::class, 'index']);
+});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/user', function () {
     return view('AfterLogin');
